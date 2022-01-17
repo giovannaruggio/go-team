@@ -18,34 +18,42 @@
 
 const inputArray = require('./index');
 
-function renderTeamMembers(data) {
+function renderTeamMembers(userInput) {
     Object.keys(inputArray).forEach(teamMember => {
         if (inputArray[teamMember].getRole() === 'Engineer') {
-            return renderEngineer(data)
+            return renderEngineer(userInput)
         } else if (inputArray[teamMember].getRole() === 'Intern') {
-            return renderIntern(data)
+            return renderIntern(userInput)
         } else
-            return renderManager(data)
+            return renderManager(userInput)
     })
 }
 
-function renderManager(data) {
+function renderManager(userInput) {
     return ``
 }
 
-function renderEngineer(data) {
+function renderEngineer(userInput) {
     return ``
 }
 
-function renderIntern(data) {
+function renderIntern(userInput) {
     return ``
 }
 
-function generateHTML(data) {
+function generateHTML(userInput) {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css">
+      <title>Team Profile Generator</title>
+    </head>
+    <header>Go Team</header>
+    <body>
+    </body>
     `
 }
+
+module.exports = generateHTML;

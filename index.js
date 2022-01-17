@@ -18,11 +18,12 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('./output/generateHTML.html');
+const generateHTML = require('./generateHTML');
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
+const inputArray = [];
 
 const managerInput = [
     {
@@ -51,7 +52,7 @@ const managerInput = [
         message: 'Which Team Member would you like to add next?',
         choices: ['Manager', 'Engineer', 'Intern', 'I am finsihed building my team.']
     }
-];
+]
 
 const engineerInput = [
     {
@@ -80,7 +81,7 @@ const engineerInput = [
         message: 'Which Team Member would you like to add next?',
         choices: ['Manager', 'Engineer', 'Intern', 'I am finsihed building my team.']
     }
-];
+]
 
 const internInput = [
     {
@@ -109,7 +110,157 @@ const internInput = [
         message: 'Which Team Member would you like to add next?',
         choices: ['Manager', 'Engineer', 'Intern', 'I am finsihed building my team.']
     }
-];
+]
 
-const inputArray = [];
+function inputManager() {
+    inquirer
+    .prompt(managerInput)
+    .then((userInput) => {
+        const addManager = new Manager(userInput);
+        inputArray.push(addManager)
+        switch (userInput.teamMember) {
+            case 'Manager':
+                init();
+                break;
+            case 'Engineer':
+                init();
+                break;
+            case 'Intern':
+                init();
+                break;
+            case 'I am finsihed building my team.':
+                writeToFile('./output/generateHTML.html', generateHTML(inputArray));
+                break;
+        }
+    });
+}
+
+function inputEngineer() {
+    inquirer
+    .prompt(engineerInput)
+    .then((userInput) => {
+        const addEngineer = new Engineer(userInput);
+        inputArray.push(addEngineer)
+        switch (userInput.teamMember) {
+            case 'Manager':
+                init();
+                break;
+            case 'Engineer':
+                init();
+                break;
+            case 'Intern':
+                init();
+                break;
+            case 'I am finsihed building my team.':
+                writeToFile('./output/generateHTML.html', generateHTML(inputArray));
+                break;
+        }
+    });
+}
+
+function inputIntern() {
+    inquirer
+    .prompt(internInput)
+    .then((userInput) => {
+        const addIntern = new Intern(userInput);
+        inputArray.push(addIntern)
+        switch (userInput.teamMember) {
+            case 'Manager':
+                init();
+                break;
+            case 'Engineer':
+                init();
+                break;
+            case 'Intern':
+                init();
+                break;
+            case 'I am finsihed building my team.':
+                writeToFile('./output/generateHTML.html', generateHTML(inputArray));
+                break;
+        }
+    });
+}
+
+function writeToFile(fileName, data) {
+        fs.writeFile(fileName, data, (err) =>
+        err ? console.log(err) : console.log('Team successfully generated!')
+        );
+}
+
+function init() {
+    inquirer
+        .prompt(managerInput)
+        .then((userInput) => {console.log(userInput)
+            const fileNew = generateHTML(userInput);
+            const fileName = './output/generatedHTML.html';
+
+            writeToFile(fileName, fileNew);
+        })
+}
+
+init();
+
+// function roleInput() {
+//     if (userInput.choices === 'Manager') {
+//         inquirer.prompt(managerInput);
+//     } else if (userInput.choices === 'Engineer') {
+//         inquirer.prompt(engineerInput);
+//     } else if (userInput.choices === 'Intern') {
+//         inquirer.prompt(internInput);
+//     } else if (userInput.choices === 'I am finsihed building my team.') {
+//         init();
+//     }
+// } 
+
+// function inputManager() {
+//     inquirer
+//     .prompt(managerInput)
+//     .then((userInput) => {
+//         const manager = new Manager(userInput);
+//         team.push(manager);
+//         console.log(team);
+//     })
+//     .catch(error => console.log(error));
+// }
+
+// function inputEngineer() {
+//     inquirer
+//     .prompt(engineerInput)
+//     .then((userInput) => {
+//         const engineer = new Engineer(userInput);
+//         team.push(engineer);
+//         console.log(team);
+//         inputRole();
+//     })
+//     .catch(error => console.log(error));
+// }
+
+// function inputIntern() {
+//     inquirer
+//     .prompt(internInput)
+//     .then((userInput) => {
+//         const intern = new Intern(userInput);
+//         team.push(intern);
+//         console.log(team);
+//         inputRole();
+//     })
+//     .catch(error => console.log(error));
+// }
+
+// function inputRole() {
+//     inquirer
+//     .prompt(newRole)
+//     .then((userInput) => {
+//         if (userInput.choices === 'Manager') 
+//             inputManager();
+//         if (userInput.choices === 'Engineer')
+//             inputEngineer();
+//         if (userInput.choices === 'Intern')
+//             inputIntern();
+//         if (userInput.choices === 'I am finsihed building my team.')
+//             writeToFile();
+//     })
+// }
+
+
 
