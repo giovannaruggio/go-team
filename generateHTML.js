@@ -1,26 +1,28 @@
+//Require index file
 const inputArray = require('./index');
 const teamMembers = [];
 
-
+//Generate HTML using getRole() to select role and .push to corresponding card
 function generateHTML(userInput) {
     if(userInput){
     userInput.map(employee => {
         if (employee.getRole() === 'Manager') {
-            const managerCard = userInput.map(renderManager);
+            const managerCard = renderManager(employee);
             teamMembers.push(managerCard);
         }
         if (employee.getRole() === 'Engineer') {
-            const engineerCard = userInput.map(renderEngineer);
+            const engineerCard = renderEngineer(employee);
             teamMembers.push(engineerCard);
         }
         if (employee.getRole() === 'Intern') {
-            const internCard = userInput.map(renderIntern);
+            const internCard = renderIntern(employee);
             teamMembers.push(internCard);
         }
     })}
     return renderTeamMembers(teamMembers)
 }
 
+//HTML for manager
 function renderManager(userInput) {
   return `<div class="row section">
     <div class="col s6 offset-s3">
@@ -31,7 +33,7 @@ function renderManager(userInput) {
       <div class="card-panel teal lighten-4">
         <span class="grey darken-3-text">
         <p>ID: ${userInput.employeeId}</p>
-        <p>Email: ${userInput.email}</p>
+        <p>Email: <a href = "mailto: ${userInput.email}">${userInput.email}</a></p>
         <p>Office Number: ${userInput.officeNum}</p>
         </span>
       </div>
@@ -39,6 +41,7 @@ function renderManager(userInput) {
   </div>`
 }
 
+//HTML for engineer
 function renderEngineer(userInput) {
     return `<div class="row section">
     <div class="col s6 offset-s3">
@@ -49,14 +52,15 @@ function renderEngineer(userInput) {
       <div class="card-panel teal lighten-4">
         <span class="grey darken-3-text">
         <p>ID: ${userInput.employeeId}</p>
-        <p>Email: ${userInput.email}</p>
-        <p>GitHub: ${userInput.githubUser}</p>
+        <p>Email: <a href = "mailto: ${userInput.email}">${userInput.email}</a></p>
+        <p>GitHub: <a href="https://github.com/${userInput.githubUser}">${userInput.githubUser}</a></p>
         </span>
       </div>
     </div>
   </div>`
 }
 
+// HTML for intern
 function renderIntern(userInput) {
     return `<div class="row section">
     <div class="col s6 offset-s3">
@@ -67,7 +71,7 @@ function renderIntern(userInput) {
       <div class="card-panel teal lighten-4">
         <span class="grey darken-3-text">
         <p>ID: ${userInput.employeeId}</p>
-        <p>Email: ${userInput.email}</p>
+        <p>Email: <a href = "mailto: ${userInput.email}">${userInput.email}</a></p>
         <p>School: ${userInput.school}</p>
         </span>
       </div>
@@ -75,6 +79,7 @@ function renderIntern(userInput) {
 </div>`
 }
 
+//HTML with materialize
 function renderTeamMembers(teamMembers) {
     return `<!DOCTYPE html>
     <html lang="en">

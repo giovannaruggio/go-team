@@ -1,3 +1,4 @@
+//Packages for application
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./generateHTML');
@@ -6,8 +7,10 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
+//Empty array of responses
 const inputArray = [];
 
+//Manager Questions
 const managerInput = [
     {
         type: 'input',
@@ -37,6 +40,7 @@ const managerInput = [
     }
 ]
 
+//Engineer Questions
 const engineerInput = [
     {
         type: 'input',
@@ -66,6 +70,7 @@ const engineerInput = [
     }
 ]
 
+// Intern Questions
 const internInput = [
     {
         type: 'input',
@@ -95,7 +100,7 @@ const internInput = [
     }
 ]
 
-
+//Functions to select team member and generate HTML file
 function inputEngineer() {
     inquirer
     .prompt(engineerInput)
@@ -144,6 +149,7 @@ function inputIntern() {
     });
 }
 
+//Initialize application
 function init() {
     inquirer
     .prompt(managerInput)
@@ -167,7 +173,7 @@ function init() {
         }
     });
 }
-
+//Write to file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
     err ? console.log(err) : console.log('Team successfully generated!')
