@@ -13,7 +13,7 @@ This Node.js command-line application takes information about employees on your 
 Open project in your command-line app, add employees to the roster, input information about your exceptional employees to generate an organized, stylized HTML webpage that will surely make your team perform at their very best! Your new generatedHTML will appear in the "output" folder. Still un-sure? A walk-through video can be found at https://drive.google.com/file/d/1zv3NRTXCf86uwoASGERAGjGqe2zcfcVo/view?usp=sharing.
 
 ## Visuals
-<img src="./assets/team-generator-gif.mov" alt="Application Gif"/>
+<img src="https://user-images.githubusercontent.com/94796554/150459648-e3b8162e-7db0-4b1a-8791-d2199da72457.mov" alt="Application Gif"/>
 
 ## Links
 - GitHub Repository
